@@ -1,0 +1,15 @@
+{
+  "name": "controller",
+  "version": "1.0.0",
+  "description": "The backend logic of Robo-head, in charge of connecting face and control-panel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "coder-booker",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
