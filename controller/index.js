@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+// const phoneLocalhost1 = require('../constant/ip').phoneLocalhost1;
 
 const app = express();
 app.use(cors());
@@ -57,6 +58,7 @@ app.post('/setMove', (req, res) => {
     console.log('setMove:', move);
 
     const data = JSON.stringify({move: move});
+
     clients.forEach(client => {
       client.write(`data: ${data}\n\n`);
     });

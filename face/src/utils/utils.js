@@ -1,19 +1,10 @@
 
 
-const waiter = (text="", time=1000) => {
+const unitWait = (time=10) => {
   return new Promise(resolve => {
-    setTimeout(() => {
-      if (text !== "") {
-        console.log("waiting", text);
-      }
-      resolve();
-    }, time);
+    setTimeout(resolve, time);
   });
 }
 
-const mover = async (distance) => {
-  await waiter("move", 2000);
 
-}
-
-export default waiter;
+export default unitWait;

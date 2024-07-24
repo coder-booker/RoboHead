@@ -1,21 +1,22 @@
 import './FacePage.css';
 import Face from "../Components/Face"
 import { useState, useEffect } from 'react';
+import {testLocalhost, phoneLocalhost1} from "../constants/ip"
 
 
 function FacePage() {
   const [face, setFace] = useState('smile');
   const [move, setMove] = useState(false);
 
-  // subcriber and canvas
+  // subcriber
   useEffect(() => {
-    const subscriber = new EventSource('http://localhost:11451/subscribe');
+    const subscriber = new EventSource(`${phoneLocalhost1}:11451/subscribe`);
     subscriber.onopen = () => {
       console.log('Connection opened');
     };
     subscriber.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log(`===========================\nA data is received`);
+      console.log(`=====================\nA data is received`);
       if ( data.face ) {
         setFace(data.face);
         console.log(`Face received: ${data.face}`);
@@ -26,8 +27,12 @@ function FacePage() {
       }
     };
     subscriber.onerror = function(error) {
-      console.error("EventSource failed:", error);
-      fetch('http://localhost:11451/faceError', { method: 'POST' });
+      console.log("EventSource failed:", error);
+      try { 
+        fetch('http://localhost:11451/faceError', { method: 'POST' });
+      } catch (err) {
+        console.log(`faceError ERROR: ${err}`);
+      }
     };
 
     // 清理函数
@@ -35,6 +40,7 @@ function FacePage() {
       subscriber.close();
     };
   }, []);
+
 
   return (
     <div id="face-page">
