@@ -3,9 +3,11 @@
     "start:controller": "cd controller && node index.js",
     "start:control-panel": "cd control-panel && npm start",
     "start:face": "cd face && npm start",
-    "start": "concurrently \"npm run start:controller\" \"npm run start:control-panel\" \"npm run start:face\""
+    "start:faceMonitor": "cd faceMonitor && npm start",
+    "start": "concurrently \"npm run start:controller\" \"npm run start:control-panel\" \"npm run start:face\" \"npm run start:faceMonitor\"" 
   },
   "dependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3"
   }
 }

@@ -1,7 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { useSpring, animated } from "@react-spring/web"
+import { useEffect, useRef } from 'react';
 import p5 from 'p5';
-import Test from "./Test.js"
 
 import unitWait from "../utils/utils";
 import "./Face.css";
@@ -167,7 +165,6 @@ function Eyes({ eyeType, move=false }) {
   // update eye type
   useEffect(() => {
     console.log("update eyeType:", eyeType);
-    
     eyeTypeRef.current = eyeType;
   }, [eyeType]);
 
@@ -267,27 +264,11 @@ function Mouth({ mouth }) {
   );
 }
 
-
-function SpringEyes({ eyeType, move=false }) {
-  return (
-    <svg id="eyes" width="200" height="200">
-      <animated.circle cy="50" />
-    </svg>
-  );
-}
-
 function Face({ face, move }) {
-
-  const [eye, setEye] = useState("bb");
-  const [move1, setMove1] = useState(false);
 
   return (
     <div id="face">
-      <div id='test'>
-        <button onClick={() => setMove1(!move1)}>toggle move</button>
-        <button onClick={() => setEye(eye === "bb" ? "bronya" : "bb")}>toggle face</button>
-      </div>
-      <Eyes eyeType={eye} move={move1}/>
+      <Eyes eyeType={face} move={move}/>
       <Mouth mouth={face}/>
     </div>
   );

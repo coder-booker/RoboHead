@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './ControlPanel.css';
-import { testLocalhost, phoneLocalhost1 } from "./ip";
+import LOCALHOST from "./ip";
 
 function ControlPanel() {
   const [face, setFace] = useState('bb');
@@ -9,10 +9,15 @@ function ControlPanel() {
 
   const changeFace = async (face) => {
     console.log(`Setting face: ${face}`);
-    const res = await fetch(`${phoneLocalhost1}:11451/setFace?data=${face}`, {
+    const res = await fetch(`${LOCALHOST}:11450/setFace?data=${face}`, {
       method: 'POST'
+      // , 
+      // headers: {
+      //   'Cache-Control': 'no-cache, no-store, must-revalidate',
+      //   'Pragma': 'no-cache',
+      //   'Expires': '0'
+      // }
     });
-
     const resText = await res.text();
     if ( res.ok ) {
       setFace(face);
@@ -20,11 +25,12 @@ function ControlPanel() {
     } else {
       alert(`Face fail set: ${resText}`);
     }
+
   }
 
   const toggleMove = async () => {
     console.log(`Setting move: ${!move}`);
-    const res = await fetch(`${phoneLocalhost1}:11451/setMove?data=${!move}`, {
+    const res = await fetch(`${LOCALHOST}:11450/setMove?data=${!move}`, {
       method: 'POST'
     });
 

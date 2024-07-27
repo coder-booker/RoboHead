@@ -14,9 +14,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start PORT=11452",
+    "start": "cross-env DEV=0 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cross-env DEV=1 react-scripts start",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import './FacePage.css';
-// import Face from "../Components/Face"
+import './FaceMonitorPage.css';
 import SpringFace from "../Components/SpringFace"
 import LOCALHOST from "../constants/ip"
 
 
-const IDENTITY = 'FACE';
+const IDENTITY = 'FACE_MONITOR';
 
 function FacePage() {
   const [face, setFace] = useState('bb');
@@ -15,12 +14,9 @@ function FacePage() {
 
   // subcriber
   useEffect(() => {
-    // const subscriber = new WebSocket(`ws:${testLocalhost}:11451/face/subscribe`);
-
-    const subscriber = new EventSource(`${LOCALHOST}:11450/face/subscribe`);
+    const subscriber = new EventSource(`${LOCALHOST}:11450/faceMonitor/subscribe`);
     subscriber.onopen = () => {
       console.log('Backend Connection Opened');
-      // subscriber.send(JSON.stringify({ identity: IDENTITY }));
     };
     subscriber.onmessage = (event) => {
       const data = JSON.parse(event.data);
@@ -35,15 +31,9 @@ function FacePage() {
       }
     };
     subscriber.onerror = function(error) {
-      console.log("Face Subcriber failed:", error);
-      // subscriber.send(JSON.parse({identity: IDENTITY, error: error.message}));
+      console.log("FaceMonitor Subcribe failed:", error);
       subscriber.close();
-    };
-
-    subscriber.onclose = function(error) {
-      console.log("Face Subcriber failed:", error);
-      subscriber.close();
-    };
+    }
   }, []);
 
 
