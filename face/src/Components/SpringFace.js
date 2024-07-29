@@ -109,6 +109,46 @@ function Eyes({ eyeType="bb", move=false }) {
               {/* <circle cx={EYE_XR} cy={EYE_Y} r={EYE_R_HALF*2-40} fill="white" /> */}
             </animated.svg>
           );
+        case "bb_wink":
+          return (
+            <animated.svg id="eyes-bb" style={{...style, ...eyeSpring}}>
+              <circle cx={EYE_XL} cy={EYE_Y+temp_offset} r={EYE_R_HALF*2} fill="#bdff66" />
+              <circle cx={EYE_XL} cy={EYE_Y+temp_offset} r={EYE_R_HALF*2-EYE_GAP} fill="black" />
+              {/* <circle cx={EYE_XL} cy={EYE_Y} r={EYE_R_HALF*2-40} fill="white" /> */}
+              <path d={`M ${EYE_XR+EYE_W_HALF} ${EYE_Y+EYE_H_HALF+40} 
+                      L ${EYE_XR-EYE_W_HALF} ${EYE_Y} 
+                      L ${EYE_XR+EYE_W_HALF} ${EYE_Y-EYE_H_HALF-40} `} 
+                  fill="transparent" 
+                  stroke="#bdff66" 
+                  strokeWidth={`${STROKE+20}`}
+                  strokeLinejoin="round"
+              />
+
+            </animated.svg>
+          );
+        case "bb_smile":
+          return (
+            <animated.svg id="eyes" style={{...style, ...eyeSpring}}>
+              <path d={`M ${EYE_XL-EYE_W_HALF-40} ${EYE_Y+EYE_H_HALF*2} 
+                      A ${EYE_W_HALF+60} ${EYE_H_HALF} 
+                      0 0 1 
+                      ${EYE_XL+EYE_W_HALF+40} ${EYE_Y+EYE_H_HALF*2}`} 
+                  fill="none" 
+                  stroke="#bdff66" 
+                  strokeWidth={`${STROKE+20}`}
+                  strokeLinejoin="round"
+              />
+              <path d={`M ${EYE_XR-EYE_W_HALF-40} ${EYE_Y+EYE_H_HALF*2} 
+                      A ${EYE_W_HALF+60} ${EYE_H_HALF} 
+                      0 0 1 
+                      ${EYE_XR+EYE_W_HALF+40} ${EYE_Y+EYE_H_HALF*2}`} 
+                  fill="none" 
+                  stroke="#bdff66" 
+                  strokeWidth={`${STROKE+20}`}
+                  strokeLinejoin="round"
+              />
+            </animated.svg>
+          );
         case "bronya":
           return (
             <animated.svg id="eyes" style={{...style, ...eyeSpring}}>

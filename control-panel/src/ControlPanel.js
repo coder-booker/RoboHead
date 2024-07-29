@@ -59,9 +59,13 @@ function ControlPanel() {
 
   return (
     <div id="control-panel">
-      <button onClick={() => {changeFace("bb")}}>face1</button>
-      <button onClick={() => {changeFace("bronya")}}>face2</button>
-      <button onClick={() => {changeFace("ig");toggleMove(false)}}>face3</button>
+      <div>
+        <button onClick={() => {changeFace("bb")}}>bb</button>
+        <button onClick={() => {changeFace("bb_wink")}}>bb_wink</button>
+        <button onClick={() => {changeFace("bb_smile")}}>bb_smile</button>
+      </div>
+      <button onClick={() => {changeFace("bronya")}}>bronya</button>
+      <button onClick={() => {changeFace("ig")}}>ig</button>
       <button onClick={() => {toggleMove()}}>Toggle move</button>
       <h1>Current status: {face}, {move ? "moving" : "static"}</h1>
     </div>
