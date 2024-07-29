@@ -4,14 +4,17 @@ import { useSpring, animated, useTransition } from '@react-spring/web'
 import "./Face.css";
 // import Eyes from "./Eyes";
 
-const WIDTH = 1000;
+const WIDTH = 1200;
 const HEIGHT = 250;
 
 const [EYE_XL, EYE_XR, EYE_Y] = [WIDTH/4, WIDTH*3/4, HEIGHT/2];
-const EYE_R_HALF = 50;
+const EYE_R_HALF = 65;
 
-const EYE_W_HALF = 70;
-const EYE_H_HALF = 50;
+const temp_offset = 10;
+const temp_offset2 = -10;
+
+const EYE_W_HALF = 90;
+const EYE_H_HALF = 70;
 
 const EYE_GAP = 40;
 
@@ -96,13 +99,13 @@ function Eyes({ eyeType="bb", move=false }) {
         switch (eye) {
         case "bb":
           return (
-            <animated.svg id="eyes" style={{...style, ...eyeSpring}}>
-              <circle cx={EYE_XL} cy={EYE_Y} r={EYE_R_HALF*2} fill="#bdff66" />
-              <circle cx={EYE_XL} cy={EYE_Y} r={EYE_R_HALF*2-EYE_GAP} fill="black" />
+            <animated.svg id="eyes-bb" style={{...style, ...eyeSpring}}>
+              <circle cx={EYE_XL} cy={EYE_Y+temp_offset} r={EYE_R_HALF*2} fill="#bdff66" />
+              <circle cx={EYE_XL} cy={EYE_Y+temp_offset} r={EYE_R_HALF*2-EYE_GAP} fill="black" />
               {/* <circle cx={EYE_XL} cy={EYE_Y} r={EYE_R_HALF*2-40} fill="white" /> */}
 
-              <circle cx={EYE_XR} cy={EYE_Y} r={EYE_R_HALF*2} fill="#bdff66" />
-              <circle cx={EYE_XR} cy={EYE_Y} r={EYE_R_HALF*2-EYE_GAP} fill="black" />
+              <circle cx={EYE_XR} cy={EYE_Y+temp_offset} r={EYE_R_HALF*2} fill="#bdff66" />
+              <circle cx={EYE_XR} cy={EYE_Y+temp_offset} r={EYE_R_HALF*2-EYE_GAP} fill="black" />
               {/* <circle cx={EYE_XR} cy={EYE_Y} r={EYE_R_HALF*2-40} fill="white" /> */}
             </animated.svg>
           );
