@@ -49,7 +49,7 @@ function FacePage() {
 
   return (
     <div id="face-page">
-      <h1>{face} {move ? "moving" : "static"}</h1>
+      {/* <h1>{face} {move ? "moving" : "static"}</h1> */}
       <SpringFace face={face} move={move} />
       {/* <Face face={face} move={move} /> */}
     </div>

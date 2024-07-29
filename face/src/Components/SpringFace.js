@@ -15,7 +15,9 @@ const EYE_H_HALF = 50;
 
 const EYE_GAP = 40;
 
-const MOVE_X_RANGE = 200;
+const STROKE = 8;
+
+const MOVE_X_RANGE = 150;
 const MOVE_Y_RANGE = 100;
 const TIME_RANGE = [1, 3];
 
@@ -79,6 +81,9 @@ function Eyes({ eyeType="bb", move=false }) {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
+    config: {
+      mass: 2,
+    }
   });
   const eyeSpring = useSpring({ 
     x: xy[0],
@@ -101,53 +106,68 @@ function Eyes({ eyeType="bb", move=false }) {
               {/* <circle cx={EYE_XR} cy={EYE_Y} r={EYE_R_HALF*2-40} fill="white" /> */}
             </animated.svg>
           );
-          case "bronya":
-            return (
-              <animated.svg id="eyes" style={{...style, ...eyeSpring}}>
-                <path d={`M ${EYE_XL-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
-                        V ${EYE_Y-EYE_H_HALF} 
-                        H ${EYE_XL+EYE_W_HALF} 
-                        V ${EYE_Y+EYE_H_HALF}`} 
-                    fill="transparent" 
-                    stroke="white" 
-                    strokeWidth="5" 
-                />
-                <path d={`M ${EYE_XL-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
-                        A ${EYE_W_HALF} ${EYE_W_HALF} 
-                        0 0 0 
-                        ${EYE_XL+EYE_W_HALF} ${EYE_Y+EYE_H_HALF}`} 
-                    fill="none" stroke="white" stroke-width="5" 
-                />
-                <path d={`M ${EYE_XR-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
-                        V ${EYE_Y-EYE_H_HALF} 
-                        H ${EYE_XR+EYE_W_HALF} 
-                        V ${EYE_Y+EYE_H_HALF}`} 
-                    fill="transparent" 
-                    stroke="white" 
-                    strokeWidth="5" 
-                />
-                <path d={`M ${EYE_XR-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
-                        A ${EYE_W_HALF} ${EYE_W_HALF} 
-                        0 0 0 
-                        ${EYE_XR+EYE_W_HALF} ${EYE_Y+EYE_H_HALF}`} 
-                    fill="none" 
-                    stroke="white" 
-                    stroke-width="5" 
-                />
-              </animated.svg>
+        case "bronya":
+          return (
+            <animated.svg id="eyes" style={{...style, ...eyeSpring}}>
+              <path d={`M ${EYE_XL-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
+                      V ${EYE_Y-EYE_H_HALF} 
+                      H ${EYE_XL+EYE_W_HALF} 
+                      V ${EYE_Y+EYE_H_HALF}`} 
+                  fill="transparent" 
+                  stroke="white" 
+                  strokeWidth={`${STROKE}`}
+                  strokeLinejoin="round"
+              />
+              <path d={`M ${EYE_XL-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
+                      A ${EYE_W_HALF} ${EYE_W_HALF} 
+                      0 0 0 
+                      ${EYE_XL+EYE_W_HALF} ${EYE_Y+EYE_H_HALF}`} 
+                  fill="none" 
+                  stroke="white" 
+                  strokeWidth={`${STROKE}`}
+                  strokeLinejoin="round"
+              />
+              <path d={`M ${EYE_XR-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
+                      V ${EYE_Y-EYE_H_HALF} 
+                      H ${EYE_XR+EYE_W_HALF} 
+                      V ${EYE_Y+EYE_H_HALF}`} 
+                  fill="transparent" 
+                  stroke="white" 
+                  strokeWidth={`${STROKE}`}
+                  strokeLinejoin="round"
+              />
+              <path d={`M ${EYE_XR-EYE_W_HALF} ${EYE_Y+EYE_H_HALF} 
+                      A ${EYE_W_HALF} ${EYE_W_HALF} 
+                      0 0 0 
+                      ${EYE_XR+EYE_W_HALF} ${EYE_Y+EYE_H_HALF}`} 
+                  fill="none" 
+                  stroke="white" 
+                  strokeWidth={`${STROKE}`}
+                  strokeLinejoin="round"
+              />
+            </animated.svg>
           );
-          default:
-            return (
-              <animated.svg id="eyes" style={{...style, ...eyeSpring}}>
-                
-                <circle cx={EYE_XL} cy={EYE_Y} r="100" fill="white" />
-                <circle cx={EYE_XL} cy={EYE_Y} r="80" fill="black" />
-                <circle cx={EYE_XL} cy={EYE_Y} r="60" fill="white" />
+        case "ig":
+          // break;
+          return (
+            <animated.div id="img" style={{...style, ...eyeSpring}}>
+              <img src="/picture.png" />
+              {/* <div id="arrow"></div> */}
+              <img src="/qrcode.png" />
+            </animated.div>
+          );
+        default:
+          return (
+            <animated.svg id="eyes" style={{...style, ...eyeSpring}}>
+              
+              <circle cx={EYE_XL} cy={EYE_Y} r="100" fill="white" />
+              <circle cx={EYE_XL} cy={EYE_Y} r="80" fill="black" />
+              <circle cx={EYE_XL} cy={EYE_Y} r="60" fill="white" />
 
-                <circle cx={EYE_XR} cy={EYE_Y} r="100" fill="white" />
-                <circle cx={EYE_XR} cy={EYE_Y} r="80" fill="black" />
-                <circle cx={EYE_XR} cy={EYE_Y} r="60" fill="white" />
-              </animated.svg>
+              <circle cx={EYE_XR} cy={EYE_Y} r="100" fill="white" />
+              <circle cx={EYE_XR} cy={EYE_Y} r="80" fill="black" />
+              <circle cx={EYE_XR} cy={EYE_Y} r="60" fill="white" />
+            </animated.svg>
           );
         }
       })}
@@ -172,14 +192,14 @@ function Mouth({ mouth }) {
     <div id="mouth-wrapper">
       {transitions((style, mouth) => {
         switch (mouth) {
-        case "bb":
-          return (
-            <animated.svg id="mouth" style={{...style}}>
-              {/* <path 
-                d={`M ${MOUTH_COORS[0]-MOUTH_W_HALF} ${MOUTH_COORS[1]+MOUTH_H_HALF} L ${MOUTH_COORS[0]} ${MOUTH_COORS[1]-MOUTH_H_HALF} L ${MOUTH_COORS[0]+MOUTH_W_HALF} ${MOUTH_COORS[1]+MOUTH_H_HALF}`} 
-                fill="transparent" stroke="white" strokeWidth="5" /> */}
-            </animated.svg>
-          );
+        // case "bb":
+        //   return (
+        //     <animated.svg id="mouth" style={{...style}}>
+        //       {/* <path 
+        //         d={`M ${MOUTH_COORS[0]-MOUTH_W_HALF} ${MOUTH_COORS[1]+MOUTH_H_HALF} L ${MOUTH_COORS[0]} ${MOUTH_COORS[1]-MOUTH_H_HALF} L ${MOUTH_COORS[0]+MOUTH_W_HALF} ${MOUTH_COORS[1]+MOUTH_H_HALF}`} 
+        //         fill="transparent" stroke="white" strokeWidth="5" /> */}
+        //     </animated.svg>
+        //   );
         case "bronya":
           return (
             <animated.svg id="mouth" style={{...style}}>

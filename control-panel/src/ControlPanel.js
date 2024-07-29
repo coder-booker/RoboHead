@@ -28,8 +28,22 @@ function ControlPanel() {
 
   }
 
-  const toggleMove = async () => {
+  const toggleMove = async (target=false) => {
     console.log(`Setting move: ${!move}`);
+    if (target) {
+      const res = await fetch(`${LOCALHOST}:11450/setMove?data=${target}`, {
+        method: 'POST'
+      });
+  
+      const resText = await res.text();
+      if ( res.ok ) {
+        setMove(target);
+        console.log(`Move successfully set: ${resText}`);
+      } else {
+        alert(`Move fail set: ${resText}`);
+      }
+      return;
+    }
     const res = await fetch(`${LOCALHOST}:11450/setMove?data=${!move}`, {
       method: 'POST'
     });
@@ -47,7 +61,7 @@ function ControlPanel() {
     <div id="control-panel">
       <button onClick={() => {changeFace("bb")}}>face1</button>
       <button onClick={() => {changeFace("bronya")}}>face2</button>
-      <button onClick={() => {changeFace("laugh")}}>face3</button>
+      <button onClick={() => {changeFace("ig");toggleMove(false)}}>face3</button>
       <button onClick={() => {toggleMove()}}>Toggle move</button>
       <h1>Current status: {face}, {move ? "moving" : "static"}</h1>
     </div>
